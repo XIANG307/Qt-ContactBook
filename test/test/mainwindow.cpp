@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::createActions()
 {
     // Open Action：設定圖示、快捷鍵與 slot
-    actionOpen = new QAction(style()->standardIcon(QStyle::SP_DialogOpenButton), "Open...", this);
+    actionOpen = new QAction(style()->standardIcon(QStyle::SP_DialogOpenButton), "Open Image", this);
     actionOpen->setShortcut(QKeySequence::Open); // Ctrl+O
     actionOpen->setStatusTip("開啟本機影像檔案");
     connect(actionOpen, &QAction::triggered, this, &MainWindow::onOpenImage);
@@ -58,7 +58,13 @@ void MainWindow::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(actionExit);
 
-    // Image / Edit 選單
+    // Edit 選單
+    QMenu *editMenu = menuBar()->addMenu("&Edit");
+    QAction *actionUndo = new QAction("Undo (V2 預留)", this);
+    actionUndo->setEnabled(false);
+    editMenu->addAction(actionUndo);
+
+    // Image 選單
     QMenu *imageMenu = menuBar()->addMenu("&Image");
     imageMenu->addAction(actionPlaceholderEdit);
 }
